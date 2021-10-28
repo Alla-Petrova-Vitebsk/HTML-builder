@@ -4,13 +4,13 @@ const { stdin, stdout, exit } = process;
 
 /*********1***********/
 //input and output
-  // stdout.write('Inter name\n');
-  // stdin.on('data', data => {
-  //   stdout.write('Hi, ');
-  //   const newdata = data.toString().split('').reverse().join('');
-  //   stdout.write(newdata);
-  //   process.exit();
-  // });
+  stdout.write('Inter name\n');
+  stdin.on('data', data => {
+    stdout.write('Hi, ');
+    const newdata = data.toString().split('').reverse().join('');
+    stdout.write(newdata);
+    process.exit();
+  });
 
   /*********2****************/
   //run with arg
@@ -116,12 +116,12 @@ const os = require('os');
 // console.log(os.homedir());
 
 //readable stream
-const readStream = fs.createReadStream(  // create stream
-  path.join(__dirname,'01-read-file','text.txt'), //path to file
-  'utf-8'  
-);
-readStream.on('data',(chunk) => console.log(chunk));
-readStream.on('error',(err) => console.log ('Error',error.message));
+// const readStream = fs.createReadStream(  // create stream
+//   path.join(__dirname,'01-read-file','text.txt'), //path to file
+//   'utf-8'  
+// );
+// readStream.on('data',(chunk) => console.log(chunk));
+// readStream.on('error',(err) => console.log ('Error',error.message));
 
 
 /* *********** */
