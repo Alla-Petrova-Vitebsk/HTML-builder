@@ -4,13 +4,13 @@ const { stdin, stdout, exit } = process;
 
 /*********1***********/
 //input and output
-  stdout.write('Inter name\n');
-  stdin.on('data', data => {
-    stdout.write('Hi, ');
-    const newdata = data.toString().split('').reverse().join('');
-    stdout.write(newdata);
-    process.exit();
-  });
+  // stdout.write('Inter name\n');
+  // stdin.on('data', data => {
+  //   stdout.write('Hi, ');
+  //   const newdata = data.toString().split('').reverse().join('');
+  //   stdout.write(newdata);
+  //   process.exit();
+  // });
 
   /*********2****************/
   //run with arg
