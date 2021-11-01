@@ -3,9 +3,10 @@ const path = require('path');
 
 const pathdir = path.join(__dirname, 'secret-folder');  //path to directory secret-folder
 
-fs.readdir(pathdir,                                    //read directory and files from secret-folder
-   { withFileTypes: true },                            //for use methods of class Dirent (isFile)
-   (err, items) => { 
+fs.readdir(                                              //readdir - read directory and files from secret-folder
+   pathdir,                                   
+   { withFileTypes: true },                            // withFileTypes - for use methods of class Dirent (isFile)
+   (err, items) => {                                   //callback function
       if (err) throw err;
       items.forEach(file => {
          if (file.isFile()) {
