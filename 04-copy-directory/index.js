@@ -10,24 +10,21 @@ fs.mkdir(pathDirTo,
    (err) => {if (err) throw err;
    });
 
-function copyFolder() {
    fs.readdir(pathDirFrom,     //use readdir for read folder
    {withFileTypes: true},
    (err,items) => {
       if (err) throw err;
       items.forEach(item => {   //for each file in folder
-         const pathFileFrom = path.join(pathDirFrom, `${item.name}`); //create full name from copied folder 
-         const pathFileTo = path.join(pathDirTo,`${item.name}`);      //create full name for target folder
+         const pathFileFrom = path.join(pathDirFrom, `${item.name}`); //create full file name from copied folder 
+         const pathFileTo = path.join(pathDirTo,`${item.name}`);      //create full file name for target folder
          fs.copyFile(pathFileFrom, pathFileTo,                        //use copyFile  
             (err) => {
                if(err) throw err;
         });
       });
    });
-   console.log(`\nFiles from ${pathDirFrom}  copied into  ${pathDirTo}\n`);
-};
 
-copyFolder();
+ console.log(`\nFiles from ${pathDirFrom}  copied into  ${pathDirTo}\n`);
 
 
 
