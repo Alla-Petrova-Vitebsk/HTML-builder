@@ -16,7 +16,7 @@ fs.readdir(                                              //readdir - read direct
                const fileNameFull = file.name;                                             //return full filename: example.txt  
                const fileName = fileNameFull.substring(0, fileNameFull.indexOf('.'));       // return filename: example
                const fileExt = path.extname(pathfile).slice(1);                            //return extension without '.' (.ext)
-               const fileSize = Math.ceil(filestats.size / 1024);                            //return round up in Kb
+               const fileSize = filestats.size / 1024;                            //return in Kb
                console.log(`${fileName} - ${fileExt} - ${fileSize} Kb`);
             })
          }
