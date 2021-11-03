@@ -32,3 +32,5 @@ fs.readdir(pathDirFrom,               //use readdir for read folder 'styles'
          }
       })
    });
+
+    console.log(`\n OK! File "bundle.css" in folder "project-dist"\n`);
