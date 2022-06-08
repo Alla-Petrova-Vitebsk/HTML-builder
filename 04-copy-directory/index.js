@@ -1,46 +1,51 @@
-const fs = require ('fs');
-const path = require('path');
+const fs = require('fs/promises');
+const {join} = require('path');
 
-const pathDirTo = path.join (__dirname,'files-copy');
-const pathDirFrom = path.join(__dirname,'files');
+const destinationDir = join(__dirname, 'files-copy');
+const sourceDir = join(__dirname, 'files');
 
+//create folder 'files-copy' 
+const createFolder = async () => {
+   try {
+      await fs.mkdir(destinationDir, { recursive: true });
+      console.log('create');
+   } catch (err) {
+      console.error(err);
+   }
+}
 
+//delete folder  'files-copy' 
+const deleteFolder = async () => {
+   try {
+      await fs.rm(destinationDir, { recursive: true });
+      console.log('Delete');
+   } catch (err) {
+      console.error(err);
+   }
+}
 
-//1. create folder 'files-copy' 
-fs.mkdir(pathDirTo,
-   {recursive:true},  //options where dir is exists
-   (err) => {if (err) throw err;
-   });
+//copy files from 'files' to 'files-copy'/
+const copyFiles = async () => {
+   try {
+      const itemsInDir = await fs.readdir(sourceDir,{withFileTypes:true});
+      for (const item of itemsInDir) {
+         const sourceFile = join(sourceDir,`${item.name}`);
+         const destinationFile = join(destinationDir,`${item.name}`);
+         if (item.isFile())
+         await fs.copyFile(sourceFile,destinationFile);
+      }
+      console.log('Copied');
+   } catch (err) {
+      console.error(err);
+   }
+}
 
-//2. delete all files from folder  'files-copy' 
-fs.readdir(pathDirTo, (err, files) => {
-   if (err) throw err;
-    files.forEach(file => {
-     fs.unlink(path.join(pathDirTo, file), err => {
-       if (err) throw err;
-     });
-   });
- });
+const copyDir = async () => {
+   await deleteFolder();
+   await createFolder();
+   await copyFiles();
 
+}
 
-
-//3. copy files from 'files' to 'files-copy'
-   fs.readdir(pathDirFrom,     //use readdir for read folder
-   {withFileTypes: true},
-   (err,items) => {
-      if (err) throw err;
-      items.forEach(item => {   //for each file in folder
-         const pathFileFrom = path.join(pathDirFrom, `${item.name}`); //create full file name from copied folder 
-         const pathFileTo = path.join(pathDirTo,`${item.name}`);      //create full file name for target folder
-         fs.copyFile(pathFileFrom, pathFileTo,                        //use copyFile  
-            (err) => {
-               if(err) throw err;
-        });
-      });
-   });
-
- console.log(`\nFiles from ${pathDirFrom}  copied into  ${pathDirTo}\n`);
-
-
-
+copyDir();
 
